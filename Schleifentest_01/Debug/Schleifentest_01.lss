@@ -1,29 +1,31 @@
 
-led_steuerung_1.elf:     file format elf32-avr
+Schleifentest_01.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000090  00000000  00000000  00000054  2**1
+  0 .text         00000096  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  000000e4  2**0
+  1 .data         00000000  00800060  00800060  000000ea  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  000000e4  2**0
+  2 .comment      00000030  00000000  00000000  000000ea  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000114  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000011c  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  00000150  2**0
+  4 .debug_aranges 00000020  00000000  00000000  00000158  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000639  00000000  00000000  00000170  2**0
+  5 .debug_info   0000064e  00000000  00000000  00000178  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000005ac  00000000  00000000  000007a9  2**0
+  6 .debug_abbrev 000005b2  00000000  00000000  000007c6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000023a  00000000  00000000  00000d55  2**0
+  7 .debug_line   00000258  00000000  00000000  00000d78  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  00000f90  2**2
+  8 .debug_frame  00000024  00000000  00000000  00000fd0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000374  00000000  00000000  00000fb4  2**0
+  9 .debug_str    00000375  00000000  00000000  00000ff4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000010  00000000  00000000  00001328  2**0
+ 10 .debug_loc    00000067  00000000  00000000  00001369  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  000013d0  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -59,28 +61,29 @@ Disassembly of section .text:
   5c:	de bf       	out	0x3e, r29	; 62
   5e:	cd bf       	out	0x3d, r28	; 61
   60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
-  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <_exit>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <_exit>
 
 00000068 <__bad_interrupt>:
   68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 0000006c <main>:
-#include <util/delay.h>
-
+#include <util/delay.h> // Delay-Funktionen einbinden (Systembibliothek)
+#include <avr/io.h> // I/O Definitionen einbinden (Systembibliothek)
 int main(void)
 {
-    
-	DDRC=0xFF; // LED-Port: Ausgang
+	//PORTKONFIGURATION:
+	DDRC=0xFF; //LED-Port: Ausgang
   6c:	8f ef       	ldi	r24, 0xFF	; 255
   6e:	84 bb       	out	0x14, r24	; 20
-	PORTC=0x00; // LEDs 0,2,4,6 einschalten
+	PORTC=0x00; //alle LEDs ausschalten (default)
   70:	15 ba       	out	0x15, r1	; 21
-	
-	while (1) 
-    {
-		PORTC = ~PORTC; //alle Leds umschalten
-  72:	85 b3       	in	r24, 0x15	; 21
-  74:	80 95       	com	r24
+	for(;;) //Arbeitsschleife
+	{
+		for (unsigned char i=0; i<=8; i++) //lokale Deklaration der Laufvariablen i
+  72:	80 e0       	ldi	r24, 0x00	; 0
+  74:	0b c0       	rjmp	.+22     	; 0x8c <main+0x20>
+		{
+			PORTC=i; //Ausgabe der Laufvariablen auf die LEDs (Dualcode)
   76:	85 bb       	out	0x15, r24	; 21
 	#else
 		//round up by default
@@ -88,19 +91,28 @@ int main(void)
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-  78:	2f ef       	ldi	r18, 0xFF	; 255
-  7a:	82 e5       	ldi	r24, 0x52	; 82
-  7c:	97 e0       	ldi	r25, 0x07	; 7
+  78:	2f e7       	ldi	r18, 0x7F	; 127
+  7a:	3f e4       	ldi	r19, 0x4F	; 79
+  7c:	92 e1       	ldi	r25, 0x12	; 18
   7e:	21 50       	subi	r18, 0x01	; 1
-  80:	80 40       	sbci	r24, 0x00	; 0
+  80:	30 40       	sbci	r19, 0x00	; 0
   82:	90 40       	sbci	r25, 0x00	; 0
   84:	e1 f7       	brne	.-8      	; 0x7e <main+0x12>
   86:	00 c0       	rjmp	.+0      	; 0x88 <main+0x1c>
   88:	00 00       	nop
-  8a:	f3 cf       	rjmp	.-26     	; 0x72 <main+0x6>
+	//PORTKONFIGURATION:
+	DDRC=0xFF; //LED-Port: Ausgang
+	PORTC=0x00; //alle LEDs ausschalten (default)
+	for(;;) //Arbeitsschleife
+	{
+		for (unsigned char i=0; i<=8; i++) //lokale Deklaration der Laufvariablen i
+  8a:	8f 5f       	subi	r24, 0xFF	; 255
+  8c:	89 30       	cpi	r24, 0x09	; 9
+  8e:	98 f3       	brcs	.-26     	; 0x76 <main+0xa>
+  90:	f0 cf       	rjmp	.-32     	; 0x72 <main+0x6>
 
-0000008c <_exit>:
-  8c:	f8 94       	cli
+00000092 <_exit>:
+  92:	f8 94       	cli
 
-0000008e <__stop_program>:
-  8e:	ff cf       	rjmp	.-2      	; 0x8e <__stop_program>
+00000094 <__stop_program>:
+  94:	ff cf       	rjmp	.-2      	; 0x94 <__stop_program>

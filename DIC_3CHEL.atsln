@@ -7,6 +7,14 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "led_steuerung_1", "led_steu
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "led_steuerung_2", "led_steuerung_2\led_steuerung_2.cproj", "{53A8BD1E-26F6-4BDB-B3F5-CC6F9D58394E}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Bitoperationen", "Bitoperationen\Bitoperationen.cproj", "{94386332-C85A-41FA-94F5-368170593A97}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Tasterprellen_01", "Tasterprellen_01\Tasterprellen_01.cproj", "{1A1C7DDD-A407-4F13-B10E-C4B436BCA28C}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Tasterprellen_02", "Tasterprellen_02\Tasterprellen_02.cproj", "{348A9E2F-485B-40AE-8696-DF0B147892DA}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Schleifentest_01", "Schleifentest_01\Schleifentest_01.cproj", "{399B4E67-3007-4474-AB40-2127BECB572D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -21,6 +29,22 @@ Global
 		{53A8BD1E-26F6-4BDB-B3F5-CC6F9D58394E}.Debug|AVR.Build.0 = Debug|AVR
 		{53A8BD1E-26F6-4BDB-B3F5-CC6F9D58394E}.Release|AVR.ActiveCfg = Release|AVR
 		{53A8BD1E-26F6-4BDB-B3F5-CC6F9D58394E}.Release|AVR.Build.0 = Release|AVR
+		{94386332-C85A-41FA-94F5-368170593A97}.Debug|AVR.ActiveCfg = Debug|AVR
+		{94386332-C85A-41FA-94F5-368170593A97}.Debug|AVR.Build.0 = Debug|AVR
+		{94386332-C85A-41FA-94F5-368170593A97}.Release|AVR.ActiveCfg = Release|AVR
+		{94386332-C85A-41FA-94F5-368170593A97}.Release|AVR.Build.0 = Release|AVR
+		{1A1C7DDD-A407-4F13-B10E-C4B436BCA28C}.Debug|AVR.ActiveCfg = Debug|AVR
+		{1A1C7DDD-A407-4F13-B10E-C4B436BCA28C}.Debug|AVR.Build.0 = Debug|AVR
+		{1A1C7DDD-A407-4F13-B10E-C4B436BCA28C}.Release|AVR.ActiveCfg = Release|AVR
+		{1A1C7DDD-A407-4F13-B10E-C4B436BCA28C}.Release|AVR.Build.0 = Release|AVR
+		{348A9E2F-485B-40AE-8696-DF0B147892DA}.Debug|AVR.ActiveCfg = Debug|AVR
+		{348A9E2F-485B-40AE-8696-DF0B147892DA}.Debug|AVR.Build.0 = Debug|AVR
+		{348A9E2F-485B-40AE-8696-DF0B147892DA}.Release|AVR.ActiveCfg = Release|AVR
+		{348A9E2F-485B-40AE-8696-DF0B147892DA}.Release|AVR.Build.0 = Release|AVR
+		{399B4E67-3007-4474-AB40-2127BECB572D}.Debug|AVR.ActiveCfg = Debug|AVR
+		{399B4E67-3007-4474-AB40-2127BECB572D}.Debug|AVR.Build.0 = Debug|AVR
+		{399B4E67-3007-4474-AB40-2127BECB572D}.Release|AVR.ActiveCfg = Release|AVR
+		{399B4E67-3007-4474-AB40-2127BECB572D}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
