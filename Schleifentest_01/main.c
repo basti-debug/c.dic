@@ -17,7 +17,7 @@ int main(void)
 		for (unsigned char i=0; i<=8; i++) //lokale Deklaration der Laufvariablen i
 		{
 			PORTC=i; //Ausgabe der Laufvariablen auf die LEDs (Dualcode)
-			_delay_ms(500); //0,5sec warten
+			//_delay_ms(500); //0,5sec warten
 		}
 	}
 }

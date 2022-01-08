@@ -13,7 +13,7 @@ int main(void)
 {
     
 	DDRC=0xFF; // LED-Port: Ausgang
-	PORTC=0x00; // LEDs 0,2,4,6 einschalten
+	PORTC=0x0A; // LEDs 0,2,4,6 einschalten
 	
 	while (1) 
     {
